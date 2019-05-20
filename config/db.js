@@ -8,7 +8,8 @@ const connectDB = async () => {
 	try {
 
 		await mongoose.connect(db, {
-			userNewIRLParser: true
+			userNewIRLParser: true,
+			useCreateIndex: true
 		});
 
 		console.log("MongoDB connected")
