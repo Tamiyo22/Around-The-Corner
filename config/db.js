@@ -8,14 +8,14 @@ const connectDB = async () => {
 	try {
 
 		await mongoose.connect(db, {
-			userNewIRLParser: true,
+			useNewUrlParser: true,
 			useCreateIndex: true
 		});
 
 		console.log("MongoDB connected")
 
-	} catch (err) {
-		console.error(err.message)
+	} catch (error) {
+		console.error(error.message)
 		//exit process with failure
 		process.exit(1);
 	}

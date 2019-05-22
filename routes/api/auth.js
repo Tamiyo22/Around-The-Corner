@@ -77,7 +77,7 @@ router.post(
 			if (!isMatch) {
 				return response.status(400).json({
 					errors: [{
-						message: "invalid"
+						message: "invalid credentials "
 					}]
 				});
 			}

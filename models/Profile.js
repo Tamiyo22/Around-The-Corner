@@ -40,11 +40,6 @@ const ProfileSchema = new mongoose.Schema({
 		required: true
 	},
 
-	petTypes: {
-
-		type: [String],
-
-	},
 	githubusername: {
 		//for connecting skills
 		type: String

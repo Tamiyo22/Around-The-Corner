@@ -108,7 +108,8 @@ router.post('/',
 			if (profile) {
 				//update
 				profile = await Profile.findOneAndUpdate({
-					user: resquest.user.id
+					// findByIdAndUpdate
+					user: request.user.id
 				}, {
 					$set: profileFields
 				}, {
@@ -129,6 +130,23 @@ router.post('/',
 		}
 
 	})
+//route GET api/profile
+//description get all profiles
+//access public
 
+router.get('/', async (request, response) => {
+
+	try {
+
+		const profiles = await Profile.find().populate('user', ['name', 'avatar']);
+		response.json(profiles)
+
+	} catch (error) {
+		console.error(error.message);
+		response.status(500).send('server error')
+
+	}
+
+})
 
 module.exports = router;
