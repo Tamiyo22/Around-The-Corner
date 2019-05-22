@@ -1,4 +1,4 @@
-const mongoose = requie('mongoose');
+const mongoose = require('mongoose');
 const ProfileSchema = new mongoose.Schema({
 
 	user: {
@@ -28,10 +28,22 @@ const ProfileSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
+	hobbies: {
+
+		type: [String],
+		required: true
+	},
+
 	skills: {
 		//skills and hobbies? should be required
 		type: [String],
 		required: true
+	},
+
+	petTypes: {
+
+		type: [String],
+
 	},
 	githubusername: {
 		//for connecting skills
