@@ -181,6 +181,38 @@ router.get('/user/:user_id', async (request, response) => {
 
 })
 
+//route DELETE api/profile
+//description delete profile user and posts
+//access private
+
+router.delete('/', auth, async (request, response) => {
+
+	try {
+		//remove users posts
+
+		//remove profile
+		await Profile.findOneAndRemove({
+			user: request.user.id
+		});
+		//remove user
+		await User.findOneAndRemove({
+			_id: request.user.id
+		});
+
+		//very cool mongoose
+		//https://mongoosejs.com/docs/api.html
+		response.json({
+			message: 'Profile deleted'
+		})
+
+	} catch (error) {
+		console.error(error.message);
+		response.status(500).send('server error')
+
+	}
+
+})
+
 
 
 module.exports = router;
