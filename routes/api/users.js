@@ -27,11 +27,11 @@ router.post(
 		})
 	],
 
-	async (request, response) => {
-		const errors = validationResult(request);
+	async (req, res) => {
+		const errors = validationResult(req);
 
 		if (!errors.isEmpty()) {
-			return response.status(400).json({
+			return res.status(400).json({
 				errors: errors.array()
 			});
 		}
@@ -40,7 +40,7 @@ router.post(
 			name,
 			email,
 			password
-		} = request.body;
+		} = req.body;
 
 		try {
 			//see if user exists
@@ -49,7 +49,7 @@ router.post(
 			});
 
 			if (user) {
-				return response.status(400).json({
+				return res.status(400).json({
 					errors: [{
 						message: "User already exists"
 					}]
@@ -98,7 +98,7 @@ router.post(
 				},
 				(error, token) => {
 					if (error) throw error;
-					response.json({
+					res.json({
 						token
 					});
 					//user token
@@ -107,7 +107,7 @@ router.post(
 			);
 		} catch (error) {
 			console.error(error.message);
-			response.status(500).send("server error");
+			res.status(500).send("server error");
 		}
 	}
 );

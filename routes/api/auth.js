@@ -15,16 +15,16 @@ const {
 //access public
 
 //protected routes using middleware auth
-router.get('/', auth, async (request, response) => {
+router.get('/', auth, async (req, res) => {
 
 	try {
 		//leave off password using -password
-		const user = await User.findById(request.user.id).select('-password')
-		//sending the response without password
-		response.json(user)
+		const user = await User.findById(req.user.id).select('-password')
+		//sending the res without password
+		res.json(user)
 	} catch (error) {
 		console.error(error.message)
-		response.status(500).send('server error')
+		res.status(500).send('server error')
 
 	}
 
@@ -42,11 +42,11 @@ router.post(
 		check("password", "password is required").exists()
 	],
 
-	async (request, response) => {
-		const errors = validationResult(request);
+	async (req, res) => {
+		const errors = validationResult(req);
 
 		if (!errors.isEmpty()) {
-			return response.status(400).json({
+			return res.status(400).json({
 				errors: errors.array()
 			});
 		}
@@ -54,7 +54,7 @@ router.post(
 		const {
 			email,
 			password
-		} = request.body;
+		} = req.body;
 
 		try {
 			//see if user exists
@@ -63,7 +63,7 @@ router.post(
 			});
 
 			if (!user) {
-				return response.status(400).json({
+				return res.status(400).json({
 					errors: [{
 						message: "invalid"
 					}]
@@ -75,7 +75,7 @@ router.post(
 			const isMatch = await bcrypt.compare(password, user.password);
 
 			if (!isMatch) {
-				return response.status(400).json({
+				return res.status(400).json({
 					errors: [{
 						message: "invalid credentials "
 					}]
@@ -96,7 +96,7 @@ router.post(
 				},
 				(error, token) => {
 					if (error) throw error;
-					response.json({
+					res.json({
 						token
 					});
 					//user token
@@ -105,7 +105,7 @@ router.post(
 			);
 		} catch (error) {
 			console.error(error.message);
-			response.status(500).send("server error");
+			res.status(500).send("server error");
 		}
 	}
 );

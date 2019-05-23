@@ -11,7 +11,7 @@ app.use(express.json({
 }));
 
 
-app.get('/', (request, response) => response.send('API RUNNING'));
+app.get('/', (req, res) => res.send('API RUNNING'));
 
 //define routes
 

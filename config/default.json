@@ -1,5 +1,7 @@
 {
 
 	"mongoURI": "mongodb+srv://melissa123:melissa123@aroundthecorner-tmrln.mongodb.net/test?retryWrites=true",
-	"jwtSecret": "secretToken"
+	"jwtSecret": "secretToken",
+	"githubClientId": "dd1f32f5ad42683db2d1",
+	"githubSecret": "8a6619126777ff1e05616edef6a58db3f4f62e8e"
 }

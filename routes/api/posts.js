@@ -6,7 +6,7 @@ const router = express.Router();
 //description test route
 //access public
 
-router.get('/', (request, response) => response.send('Posts route'));
+router.get('/', (req, res) => res.send('Posts route'));
 
 
 module.exports = router;
