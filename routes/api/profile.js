@@ -365,37 +365,41 @@ router.delete("/education/:edu_id", auth, async (req, res) => {
 });
 
 
-//route GET api/profile/github/:username
-//description get user projects from github
-//access public
+// //route GET api/profile/github/:username
+// //description get user projects from github
+// //access public
 
-router.get("/github/:username", async (req, res) => {
-	try {
+// router.get("/github/:username", async (req, res) => {
+// 	try {
 
-		const options = {
+// 		const options = {
 
-			uri: `https://api.github.users/${req.params.username}/repos?per_page=2&
-			sort=created:asc&client_id=${config.get('githubClientId')}&client_secret=${config.get('githubSecret')}`,
-			method: 'GET',
-			headers: {
-				'user-agent': 'node.js'
-			}
-		};
+// 			uri: `https://api.github.users/${
+// 				req.params.username
+// 			}/repos?per_page=2&
+// 			sort=created:asc&client_id=${config.get(
+// 				'githubClientId')
+// 			}&client_secret=${config.get('githubSecret')}`,
+// 			method: 'GET',
+// 			headers: {
+// 				'user-agent': 'node.js'
+// 			}
+// 		};
 
-		request(options, (error, response, body) => {
-			if (error) console.error(error)
+// 		request(options, (error, response, body) => {
+// 			if (error) console.error(error)
 
-			if (response.statusCode !== 200) {
-				res.status(404).json({
-					message: "no profile found"
-				})
-			}
-			res.json(JSON.parse(body))
-		});
-	} catch (error) {
-		console.error(error.message);
-		res.status(500).send("server error");
-	}
-});
+// 			// if (response.statusCode !== 200) {
+// 			// 	res.status(404).json({
+// 			// 		message: "no profile found"
+// 			// })
+
+// 			res.json(JSON.parse(body))
+// 		});
+// 	} catch (error) {
+// 		console.error(error.message);
+// 		res.status(500).send("server error");
+// 	}
+// });
 
 module.exports = router;
