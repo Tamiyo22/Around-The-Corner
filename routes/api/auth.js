@@ -19,12 +19,13 @@ router.get('/', auth, async (req, res) => {
 
 	try {
 		//leave off password using -password
+
 		const user = await User.findById(req.user.id).select('-password')
 		//sending the res without password
 		res.json(user)
 	} catch (error) {
 		console.error(error.message)
-		res.status(500).send('server error')
+		res.status(500).send('server error line 27')
 
 	}
 
@@ -32,7 +33,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 //route POST api/auth
-// authenticate user and got token
+// authenticate user and get token
 //access public
 
 router.post(
@@ -65,7 +66,7 @@ router.post(
 			if (!user) {
 				return res.status(400).json({
 					errors: [{
-						message: "invalid"
+						message: "invalid credentials"
 					}]
 				});
 			}
@@ -73,6 +74,8 @@ router.post(
 			//bcrypt has method to compare password data
 
 			const isMatch = await bcrypt.compare(password, user.password);
+
+
 
 			if (!isMatch) {
 				return res.status(400).json({
@@ -103,13 +106,13 @@ router.post(
 					//gives payload data
 				}
 			);
+
 		} catch (error) {
 			console.error(error.message);
-			res.status(500).send("server error");
+			res.status(500).send("server error line 108");
 		}
 	}
 );
-
 
 
 module.exports = router;
