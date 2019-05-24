@@ -5,7 +5,7 @@ const PostSchema = new Schema({
 
 	user: {
 		type: Schema.Types.ObjectId,
-		reference: 'users'
+		ref: 'users'
 	},
 	text: {
 		type: String,
@@ -22,7 +22,7 @@ const PostSchema = new Schema({
 		//array of user object Ids
 		user: {
 			type: Schema.Types.ObjectId,
-			reference: 'users'
+			ref: 'users'
 		}
 	}],
 	comments: [{
@@ -32,7 +32,8 @@ const PostSchema = new Schema({
 			reference: 'users'
 		},
 		text: {
-			type: String
+			type: String,
+			required: true,
 		},
 		avatar: {
 			type: String
@@ -42,6 +43,7 @@ const PostSchema = new Schema({
 			default: Date.now
 		},
 	}],
+
 	date: {
 		type: Date,
 		default: Date.now

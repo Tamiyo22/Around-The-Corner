@@ -19,7 +19,7 @@ router.get('/', auth, async (req, res) => {
 
 	try {
 		//leave off password using -password
-
+		
 		const user = await User.findById(req.user.id).select('-password')
 		//sending the res without password
 		res.json(user)
